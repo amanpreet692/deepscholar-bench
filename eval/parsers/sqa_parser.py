@@ -39,7 +39,7 @@ class SQAParser(Parser):
         sections = data.get("sections", "[]")
         raw_text, ctxs = "", dict()
         for sec in sections:
-            raw_text += sec["title"]+sec["text"]
+            raw_text += sec["title"]+sec["text"]+"\n"
             ctxs.update({c["id"]: c for c in sec["citations"]})
         ctxs = list(ctxs.values())
         reference_map = {
