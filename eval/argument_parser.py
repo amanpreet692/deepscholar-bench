@@ -95,7 +95,7 @@ def parse_args():
     parser.add_argument(
         "--nugget_groundtruth_dir_path",
         type=str,
-        default="dataset/gt_nuggets_outputs",
+        default="dataset/new_gt_nuggets",
         help="Path to the nugget groundtruth directory",
     )
 

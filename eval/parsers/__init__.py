@@ -6,6 +6,7 @@ try:
     from parsers.openscholar import OpenScholarParser
     from parsers.deepresearcher import DeepResearcherParser
     from parsers.groundtruth import GroundTruthParser
+    from parsers.sqa_parser import SQAParser
 except ImportError:
     from .parser import Parser, ParserType
     from .search_ai import SearchAIParser
@@ -14,6 +15,8 @@ except ImportError:
     from .openscholar import OpenScholarParser
     from .deepresearcher import DeepResearcherParser
     from .groundtruth import GroundTruthParser
+    from .sqa_parser import SQAParser
+
 import logging
 
 logging.basicConfig(
@@ -50,5 +53,7 @@ def get_parser(config: dict, folder_path: str):
         return OpenScholarParser(folder_path, config)
     elif parser_type == ParserType.DEEPRESEARCHER:
         return DeepResearcherParser(folder_path, config)
+    elif parser_type == ParserType.SCHOLARQA:
+        return SQAParser(folder_path, config)
     elif parser_type == ParserType.GROUNDTRUTH:
         return GroundTruthParser(folder_path, config)
