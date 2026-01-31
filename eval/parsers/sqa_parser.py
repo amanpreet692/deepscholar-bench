@@ -47,6 +47,7 @@ class SQAParser(Parser):
                 "url": f"[{i}]({ctx['paper']['corpus_id']})",
                 "title": ctx["paper"].get("title", ""),
                 "text": "...".join(ctx["snippets"]),
+                "n_cites": ctx["paper"].get("n_citations", 0),
             }
             for i, ctx in enumerate(ctxs)
         }
@@ -72,7 +73,8 @@ class SQAParser(Parser):
                 link2id[index] = len(link2id) + 1
                 info = url2abs.get(index, {})
                 docs.append(
-                    {"title": info.get("title", ""), "sent": info.get("text", "")}
+                    {"title": info.get("title", ""), "sent": info.get("text", ""),
+                     "n_cites": info.get("n_cites", 0)}
                 )
             return f"[{link2id[index]}]"
 

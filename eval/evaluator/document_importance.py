@@ -29,6 +29,8 @@ class DocumentImportanceEvaluator(Evaluator):
             count = get_citation_count_from_title(citation)
             if count is not None:
                 results.append(count)
+            elif parser.docs[i].get("n_cites"):
+                results.append(parser.docs[i]["n_cites"])
         return np.median(results) if results else 0
 
     def calculate(self, parsers: list[Parser]) -> pd.DataFrame:
