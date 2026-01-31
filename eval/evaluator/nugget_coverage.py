@@ -36,7 +36,7 @@ class NuggetCoverageEvaluator(Evaluator):
         """
         super().__init__()
         self.gt_dir = nugget_groundtruth_dir_path
-        self.nuggetizer = Nuggetizer(model=lotus.settings.lm.model, log_level=0)
+        self.nuggetizer = Nuggetizer(model="gpt-4.1", log_level=0)
 
     def _load_ground_truth_nuggets(
         self, file_id: str

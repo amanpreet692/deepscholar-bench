@@ -64,7 +64,7 @@ class CoverageRelevanceRateEvaluator(Evaluator):
         )
         df["graded_rel"] = df["_judge_1"].map(lambda x: x.score)
         df.drop(columns=["_judge_1"], inplace=True)
-        return df["graded_rel"].mean()
+        return df["graded_rel"].mean()/2.0
 
     def calculate(self, parsers: list[Parser]) -> pd.DataFrame:
         return pd.DataFrame(

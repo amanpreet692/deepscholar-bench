@@ -9,3 +9,4 @@ class ParserType(enum.Enum):
     GROUNDTRUTH = "groundtruth"
     STORM = "storm"
     OPENAI_DEEPRESEARCH = "openai_deepresearch"
+    SCHOLARQA = "scholarqa"

@@ -69,8 +69,10 @@ def get_citation_count_from_title(
             citation_count = top_result.get("cited_by_count", 0)
 
             # Compare similarity
-            similarity = jaccard_similarity(title, paper_title)
-            if similarity >= similarity_threshold:
+            similarity1 = jaccard_similarity(title, paper_title)
+            paper_title = re.sub(r"[^\w\s]", "", paper_title.lower()).strip()
+            similarity2 = jaccard_similarity(title, paper_title)
+            if similarity1 >= similarity_threshold or similarity2 >= similarity_threshold:
                 return citation_count
             else:
                 return None

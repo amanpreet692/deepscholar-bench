@@ -9,6 +9,7 @@ import pandas as pd
 from nuggetizer.core.types import Query, Document, Request
 from nuggetizer.models.nuggetizer import Nuggetizer
 from nuggetizer.core.metrics import calculate_nugget_scores
+from tqdm import tqdm
 
 
 def main():
@@ -18,7 +19,7 @@ def main():
     parser.add_argument(
         "--output_dir",
         type=str,
-        default="gt_nuggets_outputs",
+        default="dataset/gt_nuggets_outputs",
         help="Path to output directory",
     )
     parser.add_argument(
@@ -36,7 +37,7 @@ def main():
     logger = logging.getLogger(__name__)
 
     # Read the CSV file
-    data_path = "../../../scraped_data/20250607_180022/papers_with_related_works.csv"
+    data_path = "dataset/papers_with_related_works.csv"
     logger.info(f"Loading data from {data_path}")
     df = pd.read_csv(data_path)
     logger.info(f"Loaded {len(df)} rows from CSV")
@@ -52,7 +53,10 @@ def main():
 
     nuggetizer = Nuggetizer(model=args.model, log_level=args.log_level)
 
-    for i, row in df.iterrows():
+    for i, row in tqdm(df.iterrows()):
+        if os.path.exists(f"{args.output_dir}/{i}"):
+            print(f"Skipping row {i} - output already exists")
+            continue
         arxiv_id = row.get("arxiv_id", f"paper_{i}")
         abstract = row.get("abstract", "")
         related_works = row.get("clean_latex_related_works", "")
